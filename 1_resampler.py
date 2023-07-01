@@ -1,3 +1,6 @@
+# step 1, resample the data to different timeframes.
+# Alternatively you could request the data from the exchange at the desired timeframe but you may suffer redundancy by requesting the same data multiple times.
+
 import os
 import pandas as pd
 

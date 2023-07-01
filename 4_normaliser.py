@@ -1,3 +1,6 @@
+# Description: Normalise the data using MinMaxScaler, StandardScaler and RobustScaler based on statistical properties
+# Or normalise the whole dataset using MinMaxScaler and save the scaler
+
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
 import joblib
@@ -16,7 +19,7 @@ data['Timestamp'] = pd.to_datetime(data['Timestamp'])
 data['Timestamp'] = data['Timestamp'].dt.strftime('%Y%m%d%H%M%S')
 
 # scale open, high, low, close columns using MinMaxScaler as price data is not normally distributed
-data[['open', 'high', 'low', 'close']] = scaler_m.fit_transform(data[['open', 'high', 'low', 'close']])
+data[['open', 'high', 'low', 'close', 'return']] = scaler_m.fit_transform(data[['open', 'high', 'low', 'close', 'return']])
 
 # scale volume column using RobustScaler as volume data is not normally distributed and has outliers
 data['volume'] = scaler_r.fit_transform(data[['volume']])
@@ -33,10 +36,22 @@ data = data.round(4)
 # save data to csv
 data.to_csv('./normalised_data/5S_norm.csv', index=False)
 
+print('Normalised data saved to normalised_data folder')
+
+
+# Save the scalers
+joblib.dump(scaler_m, './scalers/scaler_m.pkl')
+joblib.dump(scaler_s, './scalers/scaler_s.pkl')
+joblib.dump(scaler_r, './scalers/scaler_r.pkl')
+
+# # Code to load the scalers when required
+# scaler_m = joblib.load('./scalers/scaler_m.pkl')
+# scaler_s = joblib.load('./scalers/scaler_s.pkl')
+# scaler_r = joblib.load('./scalers/scaler_r.pkl')
 
 # ///// OR /////
+# Scale the entire dataset
 
-# # Scale the entire dataset
 # scaled_data = scaler_m.fit_transform(data)
 #
 # # Create a new DataFrame with scaled data
@@ -48,9 +63,6 @@ data.to_csv('./normalised_data/5S_norm.csv', index=False)
 # data.to_csv('./normalised_data/mm_5S_norm.csv', index=False)
 
 
-
-print('Normalised data saved to normalised_data folder')
-
 # Save the scaler
-# scaler_filename = "./scalers/5S_scaler.save"
+# joblib.dump(scaler_m, './scalers/mm_scaler_m.pkl')
 

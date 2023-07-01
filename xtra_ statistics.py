@@ -1,3 +1,6 @@
+# this script is an extra step.It's used to calculate the descriptive statistics for each column in the training data.
+# it can be helpful in enabling a more informed decision when choosing which normalisations to use for each column.
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -31,6 +34,7 @@ def calculate_stats(input_file, output_file):
         'VWMA': 3,
         'ma_pdif': 3,
         'abs_pdif': 3,
+        'return': 4,
         'RSI': 3,
         'MACD': 3,
         'Signal': 3,
