@@ -41,6 +41,7 @@ def resample_data(file_name, resample_size):
 resample_data('raw_data/tick.csv', '1S')
 resample_data('raw_data/tick.csv', '5S')
 resample_data('raw_data/tick.csv', '1T')
+resample_data('raw_data/tick.csv', '5T')
 
 
 

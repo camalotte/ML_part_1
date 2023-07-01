@@ -47,7 +47,7 @@ def calculate_stats(input_file, output_file):
     })
 
     # Save stats to CSV
-    stats.to_csv(output_file)
+    # stats.to_csv(output_file)
 
 
 calculate_stats('./train_test_data/5S_train.csv', './statistics/5S_stats.csv')
